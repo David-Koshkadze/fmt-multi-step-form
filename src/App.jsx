@@ -4,7 +4,6 @@ export default function App() {
   const { steps, currentStepIndex, step, next, back } = useMutltiStepForm([
     <div>First Step</div>,
     <div>Second Step</div>,
-    <h1>Third Step</h1>
   ]);
 
   return (
