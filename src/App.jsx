@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { UserForm } from "./UserForm";
-import { AddressForm } from "./AddressForm";
+import { PersonalInfoForm } from "./PersonalInfoForm";
+import { SelectPlanForm } from "./SelectPlanForm";
 import { AccountForm } from "./AccountForm";
 import { useMutltiStepForm } from "./useMultiStepForm";
 
@@ -25,8 +25,8 @@ export default function App() {
 
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMutltiStepForm([
-      <UserForm {...data} updateFields={updateFields} />,
-      <AddressForm {...data} updateFields={updateFields} />,
+      <PersonalInfoForm {...data} updateFields={updateFields} />,
+      <SelectPlanForm {...data} updateFields={updateFields} />,
       <AccountForm {...data} updateFields={updateFields} />,
     ]);
 

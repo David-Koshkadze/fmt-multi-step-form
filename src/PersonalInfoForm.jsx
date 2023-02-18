@@ -1,7 +1,7 @@
 import React from "react";
 import { FormWrapper } from "./FormWrapper";
 
-export function UserForm({
+export function PersonalInfoForm({
   username,
   emailAddress,
   phoneNumber,
