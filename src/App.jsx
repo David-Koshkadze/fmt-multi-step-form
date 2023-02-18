@@ -5,9 +5,9 @@ import { AccountForm } from "./AccountForm";
 import { useMutltiStepForm } from "./useMultiStepForm";
 
 const INITIAL_DATA = {
-  firstName: "",
-  lastName: "",
-  age: "",
+  username: "",
+  emailAddress: "",
+  phoneNumber: "",
   street: "",
   city: "",
   email: "",
@@ -37,9 +37,9 @@ export default function App() {
   }
 
   return (
-    <div className="w-full h-screen bg-light-gray grid place-items-center">
-      <div className="flex gap-8 bg-white p-4 shadow-sm rounded-2xl w-3/4">
-        <div className="rounded-2xl w-56 bg-green-500 pt-12 pl-8">
+    <div className="w-full h-screen bg-light-gray grid place-items-center font-ubuntu">
+      <div className="flex gap-24 bg-white p-4 shadow-sm rounded-2xl pr-24">
+        <div className="rounded-2xl w-56 bg-green-500 pt-12 pl-8 bg-[url('./assets/images/bg-sidebar-desktop.svg')]">
           <div className="flex flex-col w-full gap-4 mx-auto">
             {Array.from({ length: steps.length }, (_, index) => index + 1).map(
               (stepItem, idx) => {
@@ -49,8 +49,10 @@ export default function App() {
                       <span>{idx + 1}</span>
                     </div>
                     <div>
-                      <span>Step {idx + 1}</span>
-                      <div>Personal Info</div>
+                      <span className="uppercase text-cool-gray text-sm">
+                        Step {idx + 1}
+                      </span>
+                      <div className="uppercase text-white">Personal Info</div>
                     </div>
                   </div>
                 );
@@ -62,21 +64,26 @@ export default function App() {
         <div>
           <form onSubmit={handleSubmit}>
             {step}
-            <div className="flex gap-4 mt-4 justify-end">
+            <div
+              className={`${
+                !isFirstStep ? "justify-between" : "justify-end"
+              } flex mt-4 mb-4`}
+            >
               {!isFirstStep && (
                 <button
+                  href="#"
                   type="button"
                   onClick={back}
-                  className="bg-green-500 py-2 px-4 rounded-lg"
+                  className="py-2 text-light-gray rounded-lg"
                 >
                   Back
                 </button>
               )}
               <button
                 type="submit"
-                className="bg-green-500 py-2 px-4 rounded-lg"
+                className="bg-marine-blue py-2 px-4 rounded-lg text-white"
               >
-                {!isLastStep ? "Next" : "Finish"}
+                {!isLastStep ? "Next Step" : "Finish"}
               </button>
             </div>
           </form>

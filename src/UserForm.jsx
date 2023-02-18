@@ -1,31 +1,42 @@
 import React from "react";
 import { FormWrapper } from "./FormWrapper";
 
-export function UserForm({ firstName, lastName, age, updateFields }) {
+export function UserForm({
+  username,
+  emailAddress,
+  phoneNumber,
+  updateFields,
+}) {
   return (
-    <FormWrapper title="User">
-      <label>First Name</label>
+    <FormWrapper
+      title="User"
+      infoText="Please provide your name, email address, and phone number."
+    >
+      <label>Name</label>
       <input
         autoFocus
         required
+        placeholder="Vanessa Mint"
         type="text"
-        value={firstName}
-        onChange={(e) => updateFields({ firstName: e.target.value })}
+        value={username}
+        onChange={(e) => updateFields({ username: e.target.value })}
+        className="custom-input-field"
       />
-      <label>Last Name</label>
+      <label>Email Address</label>
+      <input
+        required
+        type="email"
+        value={emailAddress}
+        onChange={(e) => updateFields({ emailAddress: e.target.value })}
+        className="custom-input-field"
+      />
+      <label>Phone Number</label>
       <input
         required
         type="text"
-        value={lastName}
-        onChange={(e) => updateFields({ lastName: e.target.value })}
-      />
-      <label>Age</label>
-      <input
-        required
-        min={1}
-        type="number"
-        value={age}
-        onChange={(e) => updateFields({ age: e.target.value })}
+        value={phoneNumber}
+        onChange={(e) => updateFields({ phoneNumber: e.target.value })}
+        className="custom-input-field !ring-strawberry-red"
       />
     </FormWrapper>
   );

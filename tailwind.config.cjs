@@ -15,6 +15,9 @@ module.exports = {
         alabaste: "hsl(231, 100%, 99%)",
         white: "hsl(0, 0%, 100%)",
       },
+      fontFamily: {
+        'ubuntu': ['Ubuntu Regular']
+      }
     },
   },
   plugins: [],
