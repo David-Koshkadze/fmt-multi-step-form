@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PersonalInfoForm } from "./PersonalInfoForm";
 import { SelectPlanForm } from "./SelectPlanForm";
 import { AccountForm } from "./AccountForm";
@@ -25,9 +25,18 @@ export default function App() {
 
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMutltiStepForm([
-      <PersonalInfoForm {...data} updateFields={updateFields} />,
-      <SelectPlanForm {...data} updateFields={updateFields} />,
-      <AccountForm {...data} updateFields={updateFields} />,
+      {
+        element: <PersonalInfoForm {...data} updateFields={updateFields} />,
+        title: "Your Info",
+      },
+      {
+        element: <SelectPlanForm {...data} updateFields={updateFields} />,
+        title: "Select Plan",
+      },
+      {
+        element: <AccountForm {...data} updateFields={updateFields} />,
+        title: "Add-ons",
+      },
     ]);
 
   function handleSubmit(e) {
@@ -36,28 +45,37 @@ export default function App() {
     alert(JSON.stringify(data));
   }
 
+  useEffect(() => {
+    console.log(step, currentStepIndex);
+  }, []);
+
   return (
     <div className="w-full h-screen bg-light-gray grid place-items-center font-ubuntu">
       <div className="flex h-[600px] gap-24 bg-white p-4 shadow-sm rounded-2xl pr-24 relative">
         <div className="rounded-2xl w-56 bg-green-500 pt-12 pl-8 bg-[url('./assets/images/bg-sidebar-desktop.svg')]">
           <div className="flex flex-col w-full gap-4 mx-auto">
-            {Array.from({ length: steps.length }, (_, index) => index + 1).map(
-              (stepItem, idx) => {
-                return (
-                  <div key={idx} className="flex w-full gap-3 items-center">
+            {steps.map((stepItem, idx) => {
+              return (
+                <div key={idx} className="flex w-full gap-3 items-center">
+                  {currentStepIndex === idx ? (
                     <div className="w-8 h-8 rounded-full bg-teal-500 border border-white grid place-items-center">
                       <span>{idx + 1}</span>
                     </div>
-                    <div>
-                      <span className="uppercase text-cool-gray text-sm">
-                        Step {idx + 1}
-                      </span>
-                      <div className="uppercase text-white">Personal Info</div>
+                  ) : (
+                    <div className="w-8 h-8 rounded-full bg-transparent text-white border border-white grid place-items-center">
+                      <span>{idx + 1}</span>
                     </div>
+                  )}
+
+                  <div>
+                    <span className="uppercase text-cool-gray text-sm">
+                      Step {idx + 1}
+                    </span>
+                    <div className="uppercase text-white">{stepItem.title}</div>
                   </div>
-                );
-              }
-            )}
+                </div>
+              );
+            })}
           </div>
         </div>
 

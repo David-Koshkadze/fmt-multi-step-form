@@ -1,24 +1,10 @@
 import React from "react";
 import { FormWrapper } from "./FormWrapper";
 
-export function AccountForm({ email, password, updateFields }) {
+export function AccountForm() {
   return (
-    <FormWrapper title="Account">
-      <label>Email</label>
-      <input
-        type="email"
-        autoFocus
-        required
-        value={email}
-        onChange={(e) => updateFields({ email: e.target.value })}
-      />
-      <label>Password</label>
-      <input
-        type="password"
-        required
-        value={password}
-        onChange={(e) => updateFields({ password: e.target.value })}
-      />
+    <FormWrapper title="Pick add-ons" infoText="Add-ons help enhance your gaming experience">
+      <h1>Hello</h1>
     </FormWrapper>
   );
 }
