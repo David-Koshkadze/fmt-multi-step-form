@@ -1,12 +1,7 @@
 import React from "react";
 import { FormWrapper } from "./FormWrapper";
 
-export function PersonalInfoForm({
-  username,
-  emailAddress,
-  phoneNumber,
-  updateFields,
-}) {
+export function PersonalInfoForm({ register, errors }) {
   return (
     <FormWrapper
       title="User"
@@ -15,28 +10,25 @@ export function PersonalInfoForm({
       <label>Name</label>
       <input
         autoFocus
-        required
         placeholder="Vanessa Mint"
         type="text"
-        value={username}
-        onChange={(e) => updateFields({ username: e.target.value })}
+        {...register("username", { required: true })}
         className="custom-input-field"
       />
+      {errors.username && (
+        <span className="text-sm text-strawberry-red">
+          This field is required
+        </span>
+      )}
+
       <label>Email Address</label>
-      <input
-        required
-        type="email"
-        value={emailAddress}
-        onChange={(e) => updateFields({ emailAddress: e.target.value })}
-        className="custom-input-field"
-      />
+      <input className="custom-input-field" {...register("email")} />
+
       <label>Phone Number</label>
       <input
-        required
         type="text"
-        value={phoneNumber}
-        onChange={(e) => updateFields({ phoneNumber: e.target.value })}
         className="custom-input-field !ring-strawberry-red"
+        {...register("age")}
       />
     </FormWrapper>
   );

@@ -3,6 +3,7 @@ import { PersonalInfoForm } from "./PersonalInfoForm";
 import { SelectPlanForm } from "./SelectPlanForm";
 import { AccountForm } from "./AccountForm";
 import { useMutltiStepForm } from "./useMultiStepForm";
+import { useForm } from "react-hook-form";
 
 const INITIAL_DATA = {
   username: "",
@@ -17,6 +18,13 @@ const INITIAL_DATA = {
 export default function App() {
   const [data, setData] = useState(INITIAL_DATA);
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
   function updateFields(fields) {
     setData((prev) => {
       return { ...prev, ...fields };
@@ -26,7 +34,7 @@ export default function App() {
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMutltiStepForm([
       {
-        element: <PersonalInfoForm {...data} updateFields={updateFields} />,
+        element: <PersonalInfoForm register={register} errors={errors}/>,
         title: "Your Info",
       },
       {
@@ -39,15 +47,18 @@ export default function App() {
       },
     ]);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (!isLastStep) return next();
-    alert(JSON.stringify(data));
-  }
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   if (!isLastStep) return next();
+  //   alert(JSON.stringify(data));
+  // }
 
-  useEffect(() => {
-    console.log(step, currentStepIndex);
-  }, []);
+  // Submit function when handleSubmit(onSubmit) is called
+  const onSubmit = (data) => console.log(data);
+
+  // useEffect(() => {
+  //   console.log(step, currentStepIndex);
+  // }, []);
 
   return (
     <div className="w-full h-screen bg-light-gray grid place-items-center font-ubuntu">
@@ -80,7 +91,7 @@ export default function App() {
         </div>
 
         <div className="relative">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             {step}
             <div
               className={`flex absolute bottom-8 right-0 left-0 ${
