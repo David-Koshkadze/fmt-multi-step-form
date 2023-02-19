@@ -5,60 +5,35 @@ import { AccountForm } from "./AccountForm";
 import { useMutltiStepForm } from "./useMultiStepForm";
 import { useForm } from "react-hook-form";
 
-const INITIAL_DATA = {
-  username: "",
-  emailAddress: "",
-  phoneNumber: "",
-  street: "",
-  city: "",
-  email: "",
-  password: "",
-};
-
 export default function App() {
-  const [data, setData] = useState(INITIAL_DATA);
-
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
-
-  function updateFields(fields) {
-    setData((prev) => {
-      return { ...prev, ...fields };
-    });
-  }
 
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMutltiStepForm([
       {
-        element: <PersonalInfoForm register={register} errors={errors}/>,
+        element: <PersonalInfoForm register={register} errors={errors} />,
         title: "Your Info",
       },
       {
-        element: <SelectPlanForm {...data} updateFields={updateFields} />,
+        element: <SelectPlanForm />,
         title: "Select Plan",
       },
       {
-        element: <AccountForm {...data} updateFields={updateFields} />,
+        element: <AccountForm />,
         title: "Add-ons",
       },
     ]);
 
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   if (!isLastStep) return next();
-  //   alert(JSON.stringify(data));
-  // }
 
   // Submit function when handleSubmit(onSubmit) is called
-  const onSubmit = (data) => console.log(data);
-
-  // useEffect(() => {
-  //   console.log(step, currentStepIndex);
-  // }, []);
+  const onSubmit = (data) => {
+    if (!isLastStep) return next();
+    console.log(data);
+  };
 
   return (
     <div className="w-full h-screen bg-light-gray grid place-items-center font-ubuntu">

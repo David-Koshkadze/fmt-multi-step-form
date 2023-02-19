@@ -22,13 +22,20 @@ export function PersonalInfoForm({ register, errors }) {
       )}
 
       <label>Email Address</label>
-      <input className="custom-input-field" {...register("email")} />
+      <input
+        className="custom-input-field"
+        {...register("email", {
+          required: true,
+        })}
+      />
 
       <label>Phone Number</label>
       <input
         type="text"
         className="custom-input-field !ring-strawberry-red"
-        {...register("age")}
+        {...register("age", {
+          required: true,
+        })}
       />
     </FormWrapper>
   );
