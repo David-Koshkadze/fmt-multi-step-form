@@ -1,4 +1,5 @@
 import React from "react";
+import InputError from "./components/InputError";
 import { FormWrapper } from "./FormWrapper";
 
 export function PersonalInfoForm({ register, errors }) {
@@ -7,19 +8,27 @@ export function PersonalInfoForm({ register, errors }) {
       title="User"
       infoText="Please provide your name, email address, and phone number."
     >
-      <label>Name</label>
-      <input
-        autoFocus
-        placeholder="Vanessa Mint"
-        type="text"
-        {...register("username", { required: true })}
-        className="custom-input-field"
-      />
-      {errors.username && (
-        <span className="text-sm text-strawberry-red">
-          This field is required
-        </span>
-      )}
+      <div className="flex flex-col">
+        <div className="flex justify-between mb-1">
+          <label>Name</label>
+          <InputError errors={errors.username} />
+        </div>
+        <input
+          autoFocus
+          placeholder="Vanessa Mint"
+          type="text"
+          {...register("username", {
+            required: "This Field is required",
+            maxLength: {
+              value: 10,
+              message: "Length must be less than ten charachters",
+            },
+          })}
+          className={`custom-input-field ${
+            errors.username && "!ring-strawberry-red"
+          }`}
+        />
+      </div>
 
       <label>Email Address</label>
       <input

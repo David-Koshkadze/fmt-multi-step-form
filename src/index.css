@@ -7,6 +7,17 @@
     font-family: "Ubuntu Regular";
     src: url("assets/fonts/Ubuntu-Regular.ttf") format('TrueType');
   }
+
+  @font-face {
+    font-family: "Ubuntu Medium";
+    src: url("assets/fonts/Ubuntu-Medium.ttf") format('TrueType');
+  }
+
+  @font-face {
+    font-family: "Ubuntu Bold";
+    src: url("assets/fonts/Ubuntu-Bold.ttf") format('TrueType');
+  }
+
 }
 
 .custom-input-field {

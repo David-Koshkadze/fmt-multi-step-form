@@ -16,8 +16,10 @@ module.exports = {
         white: "hsl(0, 0%, 100%)",
       },
       fontFamily: {
-        'ubuntu': ['Ubuntu Regular']
-      }
+        ubuntu: ["Ubuntu Regular"],
+        "ubuntu-md": ["Ubuntu Medium"],
+        "ubuntu-bold": ["Ubuntu Bold"],
+      },
     },
   },
   plugins: [],
