@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { PersonalInfoForm } from "./PersonalInfoForm";
 import { SelectPlanForm } from "./SelectPlanForm";
 import { AccountForm } from "./AccountForm";
@@ -9,6 +8,7 @@ export default function App() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -19,7 +19,9 @@ export default function App() {
         title: "Your Info",
       },
       {
-        element: <SelectPlanForm />,
+        element: (
+          <SelectPlanForm register={register} watch={watch} errors={errors} />
+        ),
         title: "Select Plan",
       },
       {
@@ -27,7 +29,6 @@ export default function App() {
         title: "Add-ons",
       },
     ]);
-
 
   // Submit function when handleSubmit(onSubmit) is called
   const onSubmit = (data) => {

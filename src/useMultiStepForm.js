@@ -10,7 +10,6 @@ export function useMutltiStepForm(steps) {
     });
   }
 
-
   function back() {
     setCurrentStepIndex((i) => {
       if (i <= 0) return i;
@@ -21,7 +20,6 @@ export function useMutltiStepForm(steps) {
   function goTo(index) {
     setCurrentStepIndex(index);
   }
-  
 
   return {
     currentStepIndex,
