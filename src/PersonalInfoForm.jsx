@@ -1,5 +1,5 @@
 import React from "react";
-import InputError from "./components/InputError";
+import InputField from "./components/InputField";
 import { FormWrapper } from "./FormWrapper";
 
 export function PersonalInfoForm({ register, errors }) {
@@ -8,44 +8,34 @@ export function PersonalInfoForm({ register, errors }) {
       title="User"
       infoText="Please provide your name, email address, and phone number."
     >
-      <div className="flex flex-col">
-        <div className="flex justify-between mb-1">
-          <label>Name</label>
-          <InputError errors={errors.username} />
-        </div>
-        <input
-          autoFocus
-          placeholder="Vanessa Mint"
-          type="text"
-          {...register("username", {
-            required: "This Field is required",
-            maxLength: {
-              value: 10,
-              message: "Length must be less than ten charachters",
-            },
-          })}
-          className={`custom-input-field ${
-            errors.username && "!ring-strawberry-red"
-          }`}
-        />
-      </div>
-
-      <label>Email Address</label>
-      <input
-        className="custom-input-field"
-        {...register("email", {
+      <InputField
+        label="Name"
+        register={register("username", {
           required: true,
+          maxLength: {
+            value: 10,
+            message: "Length must be less than ten charachters",
+          },
         })}
+        error={errors.username}
       />
 
-      <label>Phone Number</label>
-      <input
-        type="text"
-        className="custom-input-field !ring-strawberry-red"
-        {...register("age", {
+      <InputField
+        label="Email Address"
+        register={register("email", {
           required: true,
         })}
+        error={errors.email}
       />
+
+      <InputField 
+        label="Age"
+        register={register("age", {
+          required: true,
+        })}
+        error={errors.age}
+      />
+
     </FormWrapper>
   );
 }
