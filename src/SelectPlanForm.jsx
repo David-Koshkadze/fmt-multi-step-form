@@ -2,6 +2,7 @@ import { FormWrapper } from "./FormWrapper";
 import { ReactComponent as ArcadeIcon } from "./assets/images/icon-arcade.svg";
 import { ReactComponent as AdvancedIcon } from "./assets/images/icon-advanced.svg";
 import { ReactComponent as ProIcon } from "./assets/images/icon-pro.svg";
+import PlanSelect from "./components/PlanSelect";
 
 export function SelectPlanForm({ register, watch }) {
   const watchBillingMode = watch("isYearly");
@@ -11,78 +12,37 @@ export function SelectPlanForm({ register, watch }) {
       title="Select Plan"
       infoText="You have the option of monthly or yearly billing."
     >
-      <ul className="grid w-full gap-4 grid-cols-3 mb-4">
-        <li>
-          <input
-            type="radio"
-            id="arcade-mode"
-            name="planMode"
-            {...register("planMode")}
-            value="arcade"
-            className="hidden peer"
-          />
-          <label
-            htmlFor="arcade-mode"
-            className="flex flex-col w-full p-5 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-purplish-blue peer-checked:bg-gray-200 peer-hover:border-purplish-blue"
-          >
-            <ArcadeIcon />
-            <div className="mt-8">
-              <h1 className="text-lg">Arcade</h1>
-              <p className="text-gray-400">$9/mo</p>
-              {watchBillingMode && (
-                <p className="text-purplish-blue text-sm">2 months free</p>
-              )}
-            </div>
-          </label>
-        </li>
+      <div className="grid w-full gap-4 grid-cols-3 mb-4">
+        <PlanSelect
+          register={register("planMode")}
+          title="Arcade"
+          price="$9/mo"
+          watchBillingMode={watchBillingMode}
+          id="arcade-mode"
+          value="arcade"
+          icon={<ArcadeIcon />}
+        />
 
-        <li>
-          <input
-            type="radio"
-            id="advanced-mode"
-            name="planMode"
-            {...register("planMode")}
-            value="advanced"
-            className="hidden peer"
-          />
-          <label
-            htmlFor="advanced-mode"
-            className="flex flex-col w-full p-5 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-purplish-blue peer-checked:bg-gray-200 peer-hover:border-purplish-blue"
-          >
-            <AdvancedIcon />
-            <div className="mt-8">
-              <h1 className="text-lg">Advanced</h1>
-              <p className="text-gray-400">$12/mo</p>
-              {watchBillingMode && (
-                <p className="text-purplish-blue text-sm">2 months free</p>
-              )}
-            </div>
-          </label>
-        </li>
-        <li>
-          <input
-            type="radio"
-            id="pro-mode"
-            name="planMode"
-            {...register("planMode")}
-            value="pro"
-            className="hidden peer"
-          />
-          <label
-            htmlFor="pro-mode"
-            className="flex flex-col w-full p-5 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-purplish-blue peer-checked:bg-gray-200 peer-hover:border-purplish-blue"
-          >
-            <ProIcon />
-            <div className="mt-8">
-              <h1 className="text-lg">Pro</h1>
-              <p className="text-gray-400">$15/mo</p>
-              {watchBillingMode && (
-                <p className="text-purplish-blue text-sm">2 months free</p>
-              )}
-            </div>
-          </label>
-        </li>
-      </ul>
+        <PlanSelect
+          register={register("planMode")}
+          title="Advanced"
+          price="$12/mo"
+          watchBillingMode={watchBillingMode}
+          id="advanced-mode"
+          value="advanced"
+          icon={<AdvancedIcon />}
+        />
+
+        <PlanSelect
+          register={register("planMode")}
+          title="Pro"
+          price="$15/mo"
+          watchBillingMode={watchBillingMode}
+          id="pro-mode"
+          value="pro"
+          icon={<ProIcon />}
+        />
+      </div>
 
       <div className="flex py-3 justify-center items-center gap-4 bg-gray-100 rounded-lg">
         <span>Monthly</span>

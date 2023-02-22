@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { PersonalInfoForm } from "./PersonalInfoForm";
 import { SelectPlanForm } from "./SelectPlanForm";
 import { AccountForm } from "./AccountForm";
+import ThankYouComponent from "./components/ThankYouComponent";
+
 import { useMutltiStepForm } from "./useMultiStepForm";
 import { useForm } from "react-hook-form";
 
 export default function App() {
+  const [finishForm, setFinishForm] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -33,12 +38,13 @@ export default function App() {
   // Submit function when handleSubmit(onSubmit) is called
   const onSubmit = (data) => {
     if (!isLastStep) return next();
+    setFinishForm(true);
     console.log(data);
   };
 
   return (
     <div className="w-full h-screen bg-light-gray grid place-items-center font-ubuntu">
-      <div className="flex h-[600px] gap-24 bg-white p-4 shadow-sm rounded-2xl pr-24 relative">
+      <div className="flex h-[600px] w-full md:w-[80%] lg:w-[60%] gap-24 bg-white p-4 shadow-sm rounded-2xl pr-24 relative">
         <div className="rounded-2xl w-56 bg-green-500 pt-12 pl-8 bg-[url('./assets/images/bg-sidebar-desktop.svg')]">
           <div className="flex flex-col w-full gap-4 mx-auto">
             {steps.map((stepItem, idx) => {
@@ -66,34 +72,37 @@ export default function App() {
           </div>
         </div>
 
-        <div className="relative">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            {step}
-            <div
-              className={`flex absolute bottom-8 right-0 left-0 ${
-                !isFirstStep ? "justify-between" : "justify-end"
-              }
-          `}
-            >
-              {!isFirstStep && (
-                <button
-                  href="#"
-                  type="button"
-                  onClick={back}
-                  className="py-2 text-light-gray rounded-lg"
-                >
-                  Back
-                </button>
-              )}
-              <button
-                type="submit"
-                className="bg-marine-blue py-2 px-4 rounded-lg text-white"
+        {finishForm ? (
+          <ThankYouComponent />
+        ) : (
+          <div className="relative">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              {step}
+              <div
+                className={`flex absolute bottom-8 right-0 left-0 ${
+                  !isFirstStep ? "justify-between" : "justify-end"
+                }`}
               >
-                {!isLastStep ? "Next Step" : "Finish"}
-              </button>
-            </div>
-          </form>
-        </div>
+                {!isFirstStep && (
+                  <button
+                    href="#"
+                    type="button"
+                    onClick={back}
+                    className="py-2 text-light-gray rounded-lg"
+                  >
+                    Back
+                  </button>
+                )}
+                <button
+                  type="submit"
+                  className="bg-marine-blue py-2 px-4 rounded-lg text-white"
+                >
+                  {!isLastStep ? "Next Step" : "Finish"}
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );
