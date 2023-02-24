@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { PersonalInfoForm } from "./PersonalInfoForm";
-import { SelectPlanForm } from "./SelectPlanForm";
-import { AccountForm } from "./AccountForm";
+import { PersonalInfoForm } from "./components/forms/PersonalInfoForm";
+import { SelectPlanForm } from "./components/forms/SelectPlanForm";
+import { AccountForm } from "./components/forms/AccountForm";
 import ThankYouComponent from "./components/ThankYouComponent";
 
 import { useMutltiStepForm } from "./useMultiStepForm";
@@ -14,8 +14,8 @@ export default function App() {
   const methods = useForm({
     defaultValues: {
       plan_mode: "advanced",
-      isYearly: false,
-      "add-on": "online-service",
+      yearly_billing: false,
+      "add_ons": "online-service",
     },
   });
 

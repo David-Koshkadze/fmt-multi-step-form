@@ -1,8 +1,8 @@
 import { FormWrapper } from "./FormWrapper";
-import { ReactComponent as ArcadeIcon } from "./assets/images/icon-arcade.svg";
-import { ReactComponent as AdvancedIcon } from "./assets/images/icon-advanced.svg";
-import { ReactComponent as ProIcon } from "./assets/images/icon-pro.svg";
-import PlanSelect from "./components/PlanSelect";
+import { ReactComponent as ArcadeIcon } from "../../assets/images/icon-arcade.svg";
+import { ReactComponent as AdvancedIcon } from "../../assets/images/icon-advanced.svg";
+import { ReactComponent as ProIcon } from "../../assets/images/icon-pro.svg";
+import PlanSelect from '../PlanSelect'
 import { useFormContext } from "react-hook-form";
 
 export function SelectPlanForm() {
