@@ -1,21 +1,24 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
+import { useFormContext } from "react-hook-form";
 
 export default function PlanSelect({
-  register,
+  name,
   value,
   id,
   icon,
   title,
   price,
-  watchBillingMode,
+  isYearlyBilling,
 }) {
+  const { register } = useFormContext();
+
   return (
     <div>
       <input
         type="radio"
         id={id}
         name="planMode"
-        {...register}
+        {...register(name)}
         value={value}
         className="hidden peer"
       />
@@ -27,7 +30,7 @@ export default function PlanSelect({
         <div className="mt-8">
           <h1 className="text-lg">{title}</h1>
           <p className="text-gray-400">{price}</p>
-          {watchBillingMode && (
+          {isYearlyBilling && (
             <p className="text-purplish-blue text-sm">2 months free</p>
           )}
         </div>

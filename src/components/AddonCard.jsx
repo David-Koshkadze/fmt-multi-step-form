@@ -1,6 +1,9 @@
 import React from "react";
+import { useFormContext } from "react-hook-form";
 
-export default function AddonCard({ register, id, name, title }) {
+export default function AddonCard({ id, name, title, infoText }) {
+  const { register } = useFormContext();
+
   return (
     <div className="relative">
       <input
@@ -16,7 +19,7 @@ export default function AddonCard({ register, id, name, title }) {
       >
         <div className="mr-24">
           <p className="font-semibold">{title}</p>
-          <p className="text-sm">Acess to multiplayer games</p>
+          <p className="text-sm">{infoText}</p>
         </div>
         <p>+$1/mo</p>
       </label>
