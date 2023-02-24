@@ -30,7 +30,7 @@ export default function App() {
         title: "Select Plan",
       },
       {
-        element: <AccountForm />,
+        element: <AccountForm register={register} />,
         title: "Add-ons",
       },
     ]);

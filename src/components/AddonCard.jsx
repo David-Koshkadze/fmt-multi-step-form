@@ -1,14 +1,14 @@
 import React from "react";
 
-export default function AddonCard({ id, title }) {
+export default function AddonCard({ register, id, name, title }) {
   return (
     <div className="relative">
       <input
+        {...register(name)}
         type="checkbox"
         id={id}
-        value=""
+        value={id}
         className="peer absolute top-[1.875rem] left-6 w-5 h-5 bg-gray-100 border-gray-300 rounded"
-        required
       />
       <label
         htmlFor={id}
