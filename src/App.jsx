@@ -11,7 +11,13 @@ import { FormProvider, useForm } from "react-hook-form";
 export default function App() {
   const [finishForm, setFinishForm] = useState(false);
 
-  const methods = useForm();
+  const methods = useForm({
+    defaultValues: {
+      plan_mode: "advanced",
+      isYearly: false,
+      "add-on": "online-service",
+    },
+  });
 
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMutltiStepForm([

@@ -17,7 +17,6 @@ export default function PlanSelect({
       <input
         type="radio"
         id={id}
-        name="planMode"
         {...register(name)}
         value={value}
         className="hidden peer"
