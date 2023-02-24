@@ -5,32 +5,26 @@ import { AccountForm } from "./AccountForm";
 import ThankYouComponent from "./components/ThankYouComponent";
 
 import { useMutltiStepForm } from "./useMultiStepForm";
-import { useForm } from "react-hook-form";
+
+import { FormProvider, useForm } from "react-hook-form";
 
 export default function App() {
   const [finishForm, setFinishForm] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const methods = useForm();
 
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMutltiStepForm([
       {
-        element: <PersonalInfoForm register={register} errors={errors} />,
+        element: <PersonalInfoForm />,
         title: "Your Info",
       },
       {
-        element: (
-          <SelectPlanForm register={register} watch={watch} errors={errors} />
-        ),
+        element: <SelectPlanForm />,
         title: "Select Plan",
       },
       {
-        element: <AccountForm register={register} />,
+        element: <AccountForm />,
         title: "Add-ons",
       },
     ]);
@@ -75,33 +69,35 @@ export default function App() {
         {finishForm ? (
           <ThankYouComponent />
         ) : (
-          <div className="relative">
-            <form onSubmit={handleSubmit(onSubmit)}>
-              {step}
-              <div
-                className={`flex absolute bottom-8 right-0 left-0 ${
-                  !isFirstStep ? "justify-between" : "justify-end"
-                }`}
-              >
-                {!isFirstStep && (
-                  <button
-                    href="#"
-                    type="button"
-                    onClick={back}
-                    className="py-2 text-light-gray rounded-lg"
-                  >
-                    Back
-                  </button>
-                )}
-                <button
-                  type="submit"
-                  className="bg-marine-blue py-2 px-4 rounded-lg text-white"
+          <FormProvider {...methods}>
+            <div className="relative">
+              <form onSubmit={methods.handleSubmit(onSubmit)}>
+                {step}
+                <div
+                  className={`flex absolute bottom-8 right-0 left-0 ${
+                    !isFirstStep ? "justify-between" : "justify-end"
+                  }`}
                 >
-                  {!isLastStep ? "Next Step" : "Finish"}
-                </button>
-              </div>
-            </form>
-          </div>
+                  {!isFirstStep && (
+                    <button
+                      href="#"
+                      type="button"
+                      onClick={back}
+                      className="py-2 text-light-gray rounded-lg"
+                    >
+                      Back
+                    </button>
+                  )}
+                  <button
+                    type="submit"
+                    className="bg-marine-blue py-2 px-4 rounded-lg text-white"
+                  >
+                    {!isLastStep ? "Next Step" : "Finish"}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </FormProvider>
         )}
       </div>
     </div>

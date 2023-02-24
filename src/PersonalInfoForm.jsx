@@ -2,7 +2,14 @@ import React from "react";
 import InputField from "./components/InputField";
 import { FormWrapper } from "./FormWrapper";
 
-export function PersonalInfoForm({ register, errors }) {
+import { useFormContext } from "react-hook-form";
+
+export function PersonalInfoForm() {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+
   return (
     <FormWrapper
       title="User"
@@ -17,7 +24,7 @@ export function PersonalInfoForm({ register, errors }) {
             message: "Length must be less than ten charachters",
           },
         })}
-        error={errors.username}
+        error={errors?.username}
       />
 
       <InputField
@@ -25,17 +32,16 @@ export function PersonalInfoForm({ register, errors }) {
         register={register("email", {
           required: true,
         })}
-        error={errors.email}
+        error={errors?.email}
       />
 
-      <InputField 
+      <InputField
         label="Age"
         register={register("age", {
           required: true,
         })}
-        error={errors.age}
+        error={errors?.age}
       />
-
     </FormWrapper>
   );
 }
