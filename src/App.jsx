@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PersonalInfoForm } from "./components/forms/PersonalInfoForm";
 import { SelectPlanForm } from "./components/forms/SelectPlanForm";
 import { AccountForm } from "./components/forms/AccountForm";
+import Summary from "./components/forms/Summary";
 import ThankYouComponent from "./components/ThankYouComponent";
 
 import { useMutltiStepForm } from "./useMultiStepForm";
@@ -15,7 +16,6 @@ export default function App() {
     defaultValues: {
       plan_mode: "advanced",
       yearly_billing: false,
-      "add_ons": "online-service",
     },
   });
 
@@ -33,6 +33,10 @@ export default function App() {
         element: <AccountForm />,
         title: "Add-ons",
       },
+      {
+        element: <Summary />,
+        title: "Summary"
+      }
     ]);
 
   // Submit function when handleSubmit(onSubmit) is called
@@ -98,7 +102,7 @@ export default function App() {
                     type="submit"
                     className="bg-marine-blue py-2 px-4 rounded-lg text-white"
                   >
-                    {!isLastStep ? "Next Step" : "Finish"}
+                    {!isLastStep ? "Next Step" : "Confirm"}
                   </button>
                 </div>
               </form>
