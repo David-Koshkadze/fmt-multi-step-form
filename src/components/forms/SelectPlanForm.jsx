@@ -1,14 +1,20 @@
+import { useCallback, useEffect } from "react";
+
 import { FormWrapper } from "./FormWrapper";
 import { ReactComponent as ArcadeIcon } from "../../assets/images/icon-arcade.svg";
 import { ReactComponent as AdvancedIcon } from "../../assets/images/icon-advanced.svg";
 import { ReactComponent as ProIcon } from "../../assets/images/icon-pro.svg";
-import PlanSelect from '../PlanSelect'
+import PlanSelect from "../PlanSelect";
 import { useFormContext } from "react-hook-form";
+import { usePriceInfo } from "../../usePriceInfo";
 
 export function SelectPlanForm() {
   const { register, watch } = useFormContext();
 
-  const isYearlyBilling = watch("yearly_billing"); 
+  const isYearlyBilling = watch("yearly_billing");
+
+  // Custom hooks for controlling prices
+  const { prices, formatPrice } = usePriceInfo(isYearlyBilling);
 
   return (
     <FormWrapper
@@ -19,7 +25,7 @@ export function SelectPlanForm() {
         <PlanSelect
           name="plan_mode"
           title="Arcade"
-          price={isYearlyBilling ? "$90/yr" : "$9/mo"}
+          price={formatPrice(prices.arcade)}
           id="arcade-mode"
           value="arcade"
           icon={<ArcadeIcon />}
@@ -29,7 +35,7 @@ export function SelectPlanForm() {
         <PlanSelect
           name="plan_mode"
           title="Advanced"
-          price={isYearlyBilling ? "$120/yr" : "$12/mo"}
+          price={formatPrice(prices.advanced)}
           id="advanced-mode"
           value="advanced"
           icon={<AdvancedIcon />}
@@ -39,7 +45,7 @@ export function SelectPlanForm() {
         <PlanSelect
           name="plan_mode"
           title="Pro"
-          price={isYearlyBilling ? "$150/yr" : "$15/mo"}
+          price={formatPrice(prices.pro)}
           id="pro-mode"
           value="pro"
           icon={<ProIcon />}

@@ -9,6 +9,7 @@ export default function PlanSelect({
   price,
   isYearlyBilling,
 }) {
+  
   const { register } = useFormContext();
 
   return (

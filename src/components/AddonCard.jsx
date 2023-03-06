@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
 
-export default function AddonCard({ id, name, title, infoText }) {
+export default function AddonCard({ id, name, title, infoText, price }) {
   const { register } = useFormContext();
 
   return (
@@ -20,7 +20,7 @@ export default function AddonCard({ id, name, title, infoText }) {
           <p className="font-semibold">{title}</p>
           <p className="text-sm">{infoText}</p>
         </div>
-        <p>+$1/mo</p>
+        <p>{price}</p>
       </label>
     </div>
   );

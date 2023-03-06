@@ -1,7 +1,15 @@
+import { useFormContext } from "react-hook-form";
+import { usePriceInfo } from "../../usePriceInfo";
 import AddonCard from "../AddonCard";
 import { FormWrapper } from "./FormWrapper";
 
 export function AccountForm() {
+  const { getValues } = useFormContext();
+
+  const { servicePrices, formatPrice } = usePriceInfo(
+    getValues().yearly_billing
+  );
+
   return (
     <FormWrapper
       title="Pick add-ons"
@@ -9,24 +17,24 @@ export function AccountForm() {
     >
       <AddonCard
         name="add_ons"
-        id="online-service"
+        id="online_service"
         title="Online Service"
         infoText="Access to multiplayer games"
-        price="+$1/mo"
+        price={"+" + formatPrice(servicePrices.online_service)}
       />
       <AddonCard
         name="add_ons"
-        id="larger-storage"
+        id="larger_storage"
         title="Larger Storage"
         infoText="Extra 1TB of cloud save"
-        price="+2/mo"
+        price={"+" + formatPrice(servicePrices.larger_storage)}
       />
       <AddonCard
         name="add_ons"
-        id="customizable-profile"
+        id="customizable_profile"
         title="Costomizable Profile"
         infoText="Custom theme on your profile"
-        price="+2/mo"
+        price={"+" + formatPrice(servicePrices.customizable_profile)}
       />
     </FormWrapper>
   );
