@@ -12,8 +12,6 @@ export default function Summary() {
 
   const services = getValues().add_ons;
 
-  console.log(planMode);
-
   return (
     <FormWrapper
       title="Finishing up"
