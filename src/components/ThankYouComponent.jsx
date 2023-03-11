@@ -2,7 +2,7 @@ import { ReactComponent as ThankYouIcon } from "../assets/images/icon-thank-you.
 
 function ThankYouComponent() {
   return (
-    <div className="grid place-items-center">
+    <div className="grid place-items-center w-[600px]">
       <div className="flex flex-col items-center text-center">
         <ThankYouIcon />
         <div>
