@@ -86,7 +86,7 @@ export default function App() {
               <form onSubmit={methods.handleSubmit(onSubmit)}>
                 {step}
                 <div
-                  className={`flex absolute bottom-8 right-0 left-0 ${
+                  className={`flex absolute bottom-8 right-20 left-0 ${
                     !isFirstStep ? "justify-between" : "justify-end"
                   }`}
                 >
