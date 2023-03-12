@@ -1,5 +1,3 @@
-import { useCallback, useEffect } from "react";
-
 import { FormWrapper } from "./FormWrapper";
 import { ReactComponent as ArcadeIcon } from "../../assets/images/icon-arcade.svg";
 import { ReactComponent as AdvancedIcon } from "../../assets/images/icon-advanced.svg";
